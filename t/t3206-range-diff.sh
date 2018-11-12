@@ -134,7 +134,6 @@ test_expect_success 'changed commit with --no-patch diff option' '
 '
 
 test_expect_success 'changed commit with --stat diff option' '
-	four_spaces="    " &&
 	git range-diff --no-color --stat topic...changed >actual &&
 	cat >expected <<-EOF &&
 	1:  4de457d = 1:  a4b3333 s/5/A/
