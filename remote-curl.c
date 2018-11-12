@@ -436,7 +436,9 @@ static struct discovery *discover_refs(const char *service, int for_push)
 	} else if (maybe_smart &&
 		   last->len > 5 && starts_with(last->buf + 4, "version 2")) {
 		last->proto_git = 1;
-	}
+	} else if (maybe_smart && last->len > 5 &&
+		   starts_with(last->buf + 4, "ERR "))
+		die(_("remote error: %s"), last->buf + 8);
 
 	if (last->proto_git)
 		last->refs = parse_git_refs(last, for_push);
