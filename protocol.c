@@ -111,11 +111,8 @@ void get_client_protocol_version_advertisement(struct strbuf *advert)
 	if (tmp_allowed_versions[0] != config_version)
 		for (int i = 1; i < nr_allowed_versions; i++)
 			if (tmp_allowed_versions[i] == config_version) {
-				enum protocol_version swap =
-					tmp_allowed_versions[0];
-				tmp_allowed_versions[0] =
-					tmp_allowed_versions[i];
-				tmp_allowed_versions[i] = swap;
+				SWAP(tmp_allowed_versions[0],
+				     tmp_allowed_versions[i]);
 			}
 
 	strbuf_addf(advert, "version=%s",
